@@ -14,7 +14,36 @@
     <button v-on:click="createMovie">Add a Movie</button>
     <div v-for="movie in movies" v-bind:key="movie.id">
       <h3>{{ movie.title }}</h3>
+      <button v-on:click="showMovie(movie)">More Info</button>
     </div>
+    <dialog id="movie-info">
+      <form method="dialog">
+        <h1>Movie Info</h1>
+        <p>
+          Title:
+          <input type="text" v-model="currentMovie.title" />
+        </p>
+        <p>
+          Year
+          <input type="text" v-model="currentMovie.year" />
+        </p>
+        <p>
+          plot:
+          <input type="text" v-model="currentMovie.plot" />
+        </p>
+        <p>
+          director:
+          <input type="text" v-model="currentMovie.director" />
+        </p>
+        <p>
+          english:
+          <input type="text" v-model="currentMovie.english" />
+        </p>
+        <button v-on:click="updateMovie(currentMovie)">Update</button>
+        <button v-on:click="destroyMovie(currentMovie)">Delete</button>
+        <button>Close</button>
+      </form>
+    </dialog>
   </div>
 </template>
 <style>
@@ -33,6 +62,7 @@ export default {
       newMoviePlot: "",
       newMovieDirector: "",
       newMovieEnglish: "",
+      currentMovie: {},
     };
   },
   created: function () {
@@ -47,15 +77,41 @@ export default {
     },
     createMovie: function () {
       var params = {
-      title: this.newMovieTitle,
-      year: this.newMovieYear,
-      plot: this.newMoviePlot,
-      director: this.newMovieDirector,
-      english: this.newMovieEnglish,
+        title: this.newMovieTitle,
+        year: this.newMovieYear,
+        plot: this.newMoviePlot,
+        director: this.newMovieDirector,
+        english: this.newMovieEnglish,
       };
-      axios.post("/api/movies", params).then((response) => {
-        console.log(response.data);
-        this.movies.push(response.data);
+      axios
+        .post("/api/movies", params)
+        .then((response) => {
+          console.log(response.data);
+          this.movies.push(response.data);
+        })
+        .catch((error) => console.log(error.response));
+    },
+    showMovie: function (movie) {
+      this.currentMovie = movie;
+      document.querySelector("#movie-info").showModal();
+    },
+    updateMovie: function (movie) {
+      var params = {
+        title: movie.title,
+        year: movie.year,
+        plot: movie.plot,
+        director: movie.director,
+        english: movie.english,
+      };
+      axios.patch("/api/movies/" + movie.id, params).then((response) => {
+        console.log("success!", response.data);
+      });
+    },
+    destoryMovie: function (movie) {
+      axios.delete("/api/movies/" + movie.id).then((response) => {
+        console.log("success!", response.data);
+        var index = this.movies.indexOf(movie);
+        this.movies.splice(index, 1);
       });
     },
   },
