@@ -4,7 +4,8 @@ import Home from "../views/Home.vue";
 import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
-
+import MovieIndex from "../views/MovieIndex.vue";
+import MovieNew from "../views/MovieNew.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -28,6 +29,8 @@ const routes = [
   },
   { path: "/login", name: "login", component: Login },
   { path: "/logout", name: "logout", component: Logout },
+  { path: "/movies", name: "movies-index", component: MovieIndex },
+  { path: "/movies/new", name: "create-movies", component: MovieNew },
 ];
 
 const router = new VueRouter({
