@@ -3,6 +3,7 @@
     <h1>Let's go to the movies!</h1>
     <div v-for="movie in movies" v-bind:key="movie.id">
       <h3>{{ movie.title }}</h3>
+      <router-link v-bind:to="`movies/${movie.id}`">More Info</router-link>
     </div>
   </div>
 </template>

@@ -15,6 +15,7 @@
       |
       <router-link to="/movies/new">Add Movie</router-link>
     </div>
+    <router-view />
   </div>
 </template>
 

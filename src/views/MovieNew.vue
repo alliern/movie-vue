@@ -1,17 +1,34 @@
 <template>
-  <div class="movies-new">
-    <h1>Lets Add Some Movies!</h1>
-    Title:
-    <input type="text" v-model="newMovieTitle" />
-    Year:
-    <input type="text" v-model="newMovieYear" />
-    Plot:
-    <input type="text" v-model="newMoviePlot" />
-    Director:
-    <input type="text" v-model="newMovieDirector" />
-    English:
-    <input type="text" v-model="newMovieEnglish" />
-    <button v-on:click="createMovie">Add a Movie</button>
+  <div class="movie-new">
+    <form v-on:submit.prevent="createMovie()">
+      <h1>New Movie</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors" v-bind:key="error">
+          {{ error }}
+        </li>
+      </ul>
+      <div class="form-group">
+        <label>Title:</label>
+        <input type="text" class="form-control" v-model="title" />
+      </div>
+      <div class="form-group">
+        <label>Year:</label>
+        <input type="text" class="form-control" v-model="year" />
+      </div>
+      <div class="form-group">
+        <label>plot:</label>
+        <input type="text" class="form-control" v-model="plot" />
+      </div>
+      <div class="form-group">
+        <label>Director:</label>
+        <input type="text" class="form-control" v-model="director" />
+      </div>
+      <div class="form-group">
+        <label>English:</label>
+        <input type="text" class="form-control" v-model="english" />
+      </div>
+      <input type="submit" class="btn btn-primary" value="Submit" />
+    </form>
   </div>
 </template>
 <style></style>
@@ -20,37 +37,29 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      movies: [],
-      newMovieTitle: "",
-      newMovieYear: "",
-      newMoviePlot: "",
-      newMovieDirector: "",
-      newMovieEnglish: "",
+      title: "",
+      year: "",
+      plot: "",
+      director: "",
+      english: "",
+      errors: [],
     };
   },
-  created: function () {
-    this.indexMovies();
-  },
+  created: function () {},
   methods: {
-    indexMovies: function () {
-      axios.get("/api/movies").then((response) => {
-        console.log(response.data);
-        this.movies = response.data;
-      });
-    },
     createMovie: function () {
       var params = {
-        title: this.newMovieTitle,
-        year: this.newMovieYear,
-        plot: this.newMoviePlot,
-        director: this.newMovieDirector,
-        english: this.newMovieEnglish,
+        title: this.title,
+        year: this.year,
+        plot: this.plot,
+        director: this.director,
+        english: this.english,
       };
       axios
         .post("/api/movies/", params)
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/posts");
+          this.$router.push("/movies");
         })
         .catch((error) => console.log(error.response));
     },
