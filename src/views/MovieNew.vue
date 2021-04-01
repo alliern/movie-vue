@@ -50,6 +50,7 @@ export default {
         .post("/api/movies/", params)
         .then((response) => {
           console.log(response.data);
+          this.$router.push("/posts");
         })
         .catch((error) => console.log(error.response));
     },
