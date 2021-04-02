@@ -1,49 +1,12 @@
 <template>
   <div class="home">
-    <h1>Let's go to the movies!</h1>
-    Title:
-    <input type="text" v-model="newMovieTitle" />
-    Year:
-    <input type="text" v-model="newMovieYear" />
-    Plot:
-    <input type="text" v-model="newMoviePlot" />
-    Director:
-    <input type="text" v-model="newMovieDirector" />
-    English:
-    <input type="text" v-model="newMovieEnglish" />
-    <button v-on:click="createMovie">Add a Movie</button>
-    <div v-for="movie in movies" v-bind:key="movie.id">
-      <h3>{{ movie.title }}</h3>
-      <button v-on:click="showMovie(movie)">More Info</button>
+    <div class="jumbotron">
+      <h1 class="display-4">Let's go to the movies!</h1>
+      <p class="lead">Use the Navbar to Sign up, Log in/out,and view, create, edit, or destroy movies.</p>
+      <hr class="my-4" />
+      <p>Maybe I'll make this button go somewhere</p>
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </div>
-    <dialog id="movie-info">
-      <form method="dialog">
-        <h1>Movie Info</h1>
-        <p>
-          Title:
-          <input type="text" v-model="currentMovie.title" />
-        </p>
-        <p>
-          Year
-          <input type="text" v-model="currentMovie.year" />
-        </p>
-        <p>
-          plot:
-          <input type="text" v-model="currentMovie.plot" />
-        </p>
-        <p>
-          director:
-          <input type="text" v-model="currentMovie.director" />
-        </p>
-        <p>
-          english:
-          <input type="text" v-model="currentMovie.english" />
-        </p>
-        <button v-on:click="updateMovie(currentMovie)">Update</button>
-        <button v-on:click="destroyMovie(currentMovie)">Delete</button>
-        <button>Close</button>
-      </form>
-    </dialog>
   </div>
 </template>
 <style>

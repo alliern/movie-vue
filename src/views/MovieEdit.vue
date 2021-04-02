@@ -27,6 +27,10 @@
         <label>English:</label>
         <input type="text" class="form-control" v-model="movie.english" />
       </div>
+      <div class="form-group">
+        <label>Image:</label>
+        <input type="text" class="form-control" v-model="movie.image" />
+      </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
   </div>
@@ -58,6 +62,7 @@ export default {
         plot: movie.plot,
         director: movie.director,
         english: movie.english,
+        image: movie.image,
       };
       axios
         .patch("/api/movies/" + this.$route.params.id, params)

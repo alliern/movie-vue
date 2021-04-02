@@ -5,9 +5,13 @@
       <p>{{ movie.year }}</p>
       <p>{{ movie.plot }}</p>
       <p>{{ movie.director }}</p>
+      <img v-bind:src="movie.image" v-bind:alt="movie.title" />
     </div>
-    <router-link v-bind:to="`/movies/${movie.id}/edit`">Edit</router-link>
-    <button v-on:click="destroyMovie(movie)">Delete</button>
+    <button type="button" class="btn btn-outline-primary">
+      <router-link v-bind:to="`/movies/${movie.id}/edit`">Edit</router-link>
+    </button>
+    <br />
+    <button type="button" class="btn btn-danger" v-on:click="destroyMovie(movie)">Delete</button>
   </div>
 </template>
 
