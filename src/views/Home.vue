@@ -2,10 +2,21 @@
   <div class="home">
     <div class="jumbotron">
       <h1 class="display-4">Let's go to the movies!</h1>
-      <p class="lead">Use the Navbar to Sign up, Log in/out,and view, create, edit, or destroy movies.</p>
+      <p class="lead">
+        Use the Navbar to Sign up, Log in/out,and view, create, edit, or destroy movies. Add a new movie below:
+      </p>
       <hr class="my-4" />
-      <p>Maybe I'll make this button go somewhere</p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      Title:
+      <input type="text" v-model="newMovieTitle" />
+      Year:
+      <input type="text" v-model="newMovieYear" />
+      Plot:
+      <input type="text" v-model="newMoviePlot" />
+      Director:
+      <input type="text" v-model="newMovieDirector" />
+      English:
+      <input type="text" v-model="newMovieEnglish" />
+      <button v-on:click="createMovie">Add a Movie</button>
     </div>
   </div>
 </template>

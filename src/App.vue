@@ -48,15 +48,19 @@
               Dropdown
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <router-link to="/signup">Signup</router-link>
-              <br />
-              <router-link to="/login">Login</router-link>
-              <br />
+              <span v-if="isLoggedIn()">
+                <router-link to="/logout">Logout</router-link>
+              </span>
+              <span v-else>
+                <router-link to="/signup">Signup</router-link>
+                <br />
+                <router-link to="/login">Login</router-link>
+                <br />
+              </span>
               <router-link to="/movies">All Movies</router-link>
               <br />
               <router-link to="/movies/new">Add Movie</router-link>
               <div class="dropdown-divider"></div>
-              <router-link to="/logout">Logout</router-link>
             </div>
           </li>
           <li class="nav-item">
@@ -79,3 +83,12 @@ body {
   margin-right: 5%;
 }
 </style>
+<script>
+export default {
+  methods: {
+    isLoggedIn: function () {
+      return localStorage.getItem("jwt");
+    },
+  },
+};
+</script>

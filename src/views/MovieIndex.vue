@@ -1,10 +1,15 @@
 <template>
   <div class="movies-index">
     <h1>Let's go to the movies!</h1>
-    <!-- <div v-for="movie in movies" v-bind:key="movie.id">
-      <h3>{{ movie.title }}</h3>
-      <router-link v-bind:to="`movies/${movie.id}`">More Info</router-link> -->
-    <!-- </div> -->
+    <div>
+      <button>Sort Alphabetically</button>
+    </div>
+  <div v-for="movie in orderBy(filterBy(movies, titleFilter, 'title'), 'title')" v-bind:key="movie.id">
+    Search by name:
+    <input v-model="titleFilter" list="titles" />
+    <datalist id="titles">
+      <option v-for="movie in movies" v-bind:key="movie.id">{{ movie.title }}</option>
+    </datalist>
     <div class="card mb-3" style="max-width: 540px" v-for="movie in movies" v-bind:key="movie.id">
       <div class="row no-gutters">
         <div class="col-md-4">
@@ -28,7 +33,9 @@
 <style></style>
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function () {
     return {
       movies: [],
