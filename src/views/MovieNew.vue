@@ -1,6 +1,6 @@
 <template>
   <div class="movie-new">
-    <form v-on:submit.prevent="createMovie()">
+    <form action="/movies" method="post" v-on:submit.prevent="createMovie()">
       <h1>New Movie</h1>
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
@@ -17,7 +17,8 @@
       </div>
       <div class="form-group">
         <label>plot:</label>
-        <input type="text" class="form-control" v-model="plot" />
+        <textarea class="form-control" id="plot" cols="30" rows="10"></textarea>
+        <!-- <input type="text" class="form-control" v-model="plot" /> -->
         <small v-if="plot.length > 0">{{ 200 - plot.length }} characters remaining</small>
       </div>
       <div class="form-group">
@@ -36,7 +37,62 @@
     </form>
   </div>
 </template>
-<style></style>
+<style>
+fform {
+  /* Center the form on the page */
+  margin: 0 auto;
+  width: 500px;
+  /* Form outline */
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+form li + li {
+  margin-top: 1em;
+}
+
+label {
+  /* Uniform size & alignment */
+  display: inline-block;
+  width: 90px;
+  text-align: right;
+}
+
+input,
+textarea {
+  /* To make sure that all text fields have the same font settings
+     By default, textareas have a monospace font */
+  font: 1em sans-serif;
+
+  /* Uniform text field size */
+  width: 300px;
+  box-sizing: border-box;
+
+  /* Match form field borders */
+  border: 1px solid #999;
+}
+
+input:focus,
+textarea:focus {
+  /* Additional highlight for focused elements */
+  border-color: #000;
+}
+
+textarea {
+  /* Align multiline text fields with their labels */
+  vertical-align: top;
+
+  /* Provide space to type some text */
+  height: 5em;
+}
+</style>
 <script>
 import axios from "axios";
 export default {

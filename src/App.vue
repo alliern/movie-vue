@@ -78,9 +78,12 @@
 </template>
 
 <style>
-body {
+/* #app {
   margin-left: 5%;
   margin-right: 5%;
+} */
+#app {
+  background-color: aquamarine;
 }
 </style>
 <script>
